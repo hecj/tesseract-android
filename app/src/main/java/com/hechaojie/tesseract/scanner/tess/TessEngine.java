@@ -36,25 +36,26 @@ public class TessEngine {
         tessBaseAPI.setDebug(true);
         tessBaseAPI.init(path, "eng");
         // 白名单
-        //tessBaseAPI.setVariable(TessBaseAPI.VAR_CHAR_WHITELIST, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789");
+//        tessBaseAPI.setVariable(TessBaseAPI.VAR_CHAR_WHITELIST, "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789");
+        tessBaseAPI.setVariable(TessBaseAPI.VAR_CHAR_WHITELIST, "0123456789");
         // 黑名单
-        //tessBaseAPI.setVariable(TessBaseAPI.VAR_CHAR_BLACKLIST, "!@#$%^&*()_+=-[]}{;:'\"\\|~`,./<>?");
+        tessBaseAPI.setVariable(TessBaseAPI.VAR_CHAR_BLACKLIST, "!@#$%^&*()_+=-[]}{;:'\"\\|~`,./<>?");
         tessBaseAPI.setPageSegMode(TessBaseAPI.PageSegMode.PSM_AUTO_OSD);
         Log.d(TAG, "Ended initialization of TessEngine");
         Log.d(TAG, "Running inspection on bitmap");
         tessBaseAPI.setImage(bitmap);
         String inspection = tessBaseAPI.getHOCRText(0);
-        Log.d("test",inspection);
-        Log.d(TAG, "Confidence values: " + tessBaseAPI.meanConfidence());
+        Log.d("tess",inspection);
+        Log.d(TAG, "tess values: " + tessBaseAPI.meanConfidence());
         tessBaseAPI.end();
         System.gc();
-        //return Tools.getTelNum(inspection);
-        //return inspection;
+        return Tools.getTelNum(inspection);
+//        return inspection;
 
-        Document doc = Jsoup.parse(inspection);
-        String str = doc.select(".ocr_carea").text();
+//        Document doc = Jsoup.parse(inspection);
+//        String str = doc.select(".ocr_carea").text();
 
-        return str;
+//        return str;
     }
 
 }
